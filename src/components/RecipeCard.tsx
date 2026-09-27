@@ -1,4 +1,4 @@
-import { ChefHat } from 'lucide-react'
+import { ChefHat, Trash2 } from 'lucide-react'
 import type { Recipe } from '../types'
 import { findCategoria } from '../data/ingredientCatalog'
 import IconTile from './IconTile'
@@ -6,16 +6,30 @@ import IconTile from './IconTile'
 interface Props {
   recipe: Recipe
   onClick: () => void
+  onDelete: () => void
 }
 
-export default function RecipeCard({ recipe, onClick }: Props) {
+export default function RecipeCard({ recipe, onClick, onDelete }: Props) {
   const previewIcons = recipe.ingredientes.slice(0, 4)
+
+  function handleDeleteClick(e: React.MouseEvent) {
+    e.stopPropagation()
+    if (confirm(`¿Eliminar la receta "${recipe.titulo}"?`)) onDelete()
+  }
 
   return (
     <button
       onClick={onClick}
-      className="group flex flex-col text-left bg-dark-surface rounded-card shadow-card overflow-hidden hover:-translate-y-0.5 hover:shadow-lg transition-all"
+      className="group relative flex flex-col text-left bg-dark-surface rounded-card shadow-card overflow-hidden hover:-translate-y-0.5 hover:shadow-lg transition-all"
     >
+      <button
+        type="button"
+        onClick={handleDeleteClick}
+        aria-label={`Eliminar ${recipe.titulo}`}
+        className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur flex items-center justify-center text-gray-300 opacity-0 group-hover:opacity-100 hover:bg-red-500/80 hover:text-white transition-all"
+      >
+        <Trash2 size={16} />
+      </button>
       <div className="h-36 bg-dark-alt flex items-center justify-center overflow-hidden">
         {recipe.fotoUrl ? (
           <img src={recipe.fotoUrl} alt={recipe.titulo} className="w-full h-full object-cover" />

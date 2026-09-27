@@ -2,6 +2,17 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
+## Limpieza de descripciones con IA
+
+Al guardar una receta, la descripción se reescribe automáticamente (ordenada, con pasos numerados) usando una Supabase Edge Function que llama a OpenAI. Para activarlo:
+
+1. Instala la [Supabase CLI](https://supabase.com/docs/guides/cli) y haz login: `supabase login`
+2. Enlaza el proyecto: `supabase link --project-ref <tu-project-ref>`
+3. Configura el secreto con tu API key de OpenAI: `supabase secrets set OPENAI_API_KEY=sk-...`
+4. Despliega la función: `supabase functions deploy tidy-description`
+
+Si la función no está desplegada o falla, la app guarda la descripción tal cual la escribiste (no bloquea el guardado).
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)

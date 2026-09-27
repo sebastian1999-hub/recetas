@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Camera } from 'lucide-react'
 import type { Recipe, RecipeIngredient } from '../types'
+import { tidyDescription } from '../lib/ai'
 import IngredientPicker from './IngredientPicker'
 import SpecificationsList from './SpecificationsList'
 
@@ -76,10 +77,11 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
     setSaving(true)
     setError(null)
     try {
+      const descripcionLimpia = await tidyDescription(descripcion.trim())
       await onSave({
         id: recipe?.id,
         titulo: titulo.trim(),
-        descripcion: descripcion.trim(),
+        descripcion: descripcionLimpia,
         fotoUrl,
         ingredientes,
       })
