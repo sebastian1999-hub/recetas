@@ -42,23 +42,23 @@ export default function SpecificationsList({ ingredientes, onChangeCantidad, onR
             {items.map((ing) => (
               <li
                 key={ing.id}
-                className="flex items-center gap-3 bg-dark-alt rounded-2xl border border-white/10 shadow-sm px-3 py-2"
+                className="flex items-center gap-2 sm:gap-3 bg-dark-alt rounded-2xl border border-white/10 shadow-sm px-2.5 sm:px-3 py-2"
               >
                 <IconTile icono={ing.icono} categoria={findCategoria(ing.nombre)} size="sm" />
-                <span className="flex-1 text-sm font-medium text-gray-200 truncate">{ing.nombre}</span>
+                <span className="flex-1 min-w-0 text-sm font-medium text-gray-200 truncate">{ing.nombre}</span>
 
                 <input
                   type="number"
                   min={0}
                   value={ing.cantidadGramos}
                   onChange={(e) => onChangeCantidad(ing.id, Number(e.target.value))}
-                  className="w-20 rounded-full border border-white/10 bg-dark-surface text-white px-2 py-1 text-sm text-right focus:outline-none focus:ring-2 focus:ring-yaya-400"
+                  className="w-16 sm:w-20 rounded-full border border-white/10 bg-dark-surface text-white px-2 py-1 text-sm text-right focus:outline-none focus:ring-2 focus:ring-yaya-400"
                 />
-                <span className="text-xs text-gray-500 w-6">g</span>
+                <span className="text-xs text-gray-500 w-4 sm:w-6">g</span>
                 <button
                   type="button"
                   onClick={() => onRemove(ing.id)}
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-gray-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-gray-500 hover:bg-red-500/10 hover:text-red-400 transition-colors shrink-0"
                   aria-label={`Quitar ${ing.nombre}`}
                 >
                   ✕

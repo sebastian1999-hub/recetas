@@ -11,7 +11,7 @@ interface Props {
 export default function FoodIcon({ icono, size, color, className = '' }: Props) {
   if (icono.startsWith('food:')) {
     const slug = icono.slice('food:'.length)
-    const maskImage = `url(/food-icons/${slug}.svg)`
+    const maskImage = `url(${import.meta.env.BASE_URL}food-icons/${slug}.svg)`
     return (
       <span
         aria-hidden="true"

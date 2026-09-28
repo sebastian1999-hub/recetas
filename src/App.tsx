@@ -66,14 +66,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-dark-bg">
-      <header className="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-6 flex items-center justify-between">
+      <header className="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-yaya-400">Recetas de la yaya</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-yaya-400">Recetas de la yaya</h1>
           <p className="text-gray-400 text-sm mt-1">Todas nuestras recetas, en un solo sitio</p>
         </div>
         <button
           onClick={openNewRecipe}
-          className="bg-yaya-500 hover:bg-yaya-600 text-white font-medium px-5 py-2.5 rounded-full shadow-card transition-colors"
+          className="bg-yaya-500 hover:bg-yaya-600 text-white font-medium px-5 py-3 sm:py-2.5 rounded-full shadow-card transition-colors w-full sm:w-auto"
         >
           + Nueva receta
         </button>

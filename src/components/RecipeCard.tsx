@@ -26,7 +26,7 @@ export default function RecipeCard({ recipe, onClick, onDelete }: Props) {
         type="button"
         onClick={handleDeleteClick}
         aria-label={`Eliminar ${recipe.titulo}`}
-        className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur flex items-center justify-center text-gray-300 opacity-0 group-hover:opacity-100 hover:bg-red-500/80 hover:text-white transition-all"
+        className="absolute top-2 right-2 z-10 w-9 h-9 rounded-full bg-black/50 backdrop-blur flex items-center justify-center text-gray-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 active:bg-red-500/80 hover:bg-red-500/80 hover:text-white transition-all"
       >
         <Trash2 size={16} />
       </button>

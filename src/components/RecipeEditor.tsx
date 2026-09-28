@@ -107,12 +107,12 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-start sm:items-center justify-center p-4 z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/40 flex items-end sm:items-center justify-center sm:p-4 z-50 overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="bg-dark-surface rounded-card shadow-card w-full max-w-2xl my-8 flex flex-col max-h-[90vh]"
+        className="bg-dark-surface rounded-t-card sm:rounded-card shadow-card w-full max-w-2xl sm:my-8 flex flex-col max-h-[95vh] sm:max-h-[90vh]"
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-white/10">
           <h2 className="text-lg font-semibold text-white">
             {recipe ? 'Editar receta' : 'Nueva receta'}
           </h2>
@@ -125,7 +125,7 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
           </button>
         </div>
 
-        <div className="overflow-y-auto px-6 py-5 flex flex-col gap-5">
+        <div className="overflow-y-auto px-4 sm:px-6 py-5 flex flex-col gap-5">
           <div className="flex gap-4 items-start">
             <label className="w-24 h-24 rounded-2xl bg-dark-alt border border-dashed border-yaya-400 flex items-center justify-center overflow-hidden cursor-pointer shrink-0 relative">
               {fotoUrl ? (
@@ -173,13 +173,13 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
           {error && <p className="text-sm text-red-400">{error}</p>}
         </div>
 
-        <div className="flex items-center justify-between px-6 py-4 border-t border-white/10">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-white/10 gap-3">
           {recipe ? (
             <button
               type="button"
               onClick={handleDelete}
               disabled={saving}
-              className="text-sm text-red-400 hover:underline disabled:opacity-50"
+              className="text-sm text-red-400 hover:underline disabled:opacity-50 shrink-0"
             >
               Eliminar receta
             </button>
@@ -189,7 +189,7 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
           <button
             type="submit"
             disabled={saving}
-            className="bg-yaya-500 hover:bg-yaya-600 text-white font-medium px-6 py-2.5 rounded-full disabled:opacity-50 transition-colors"
+            className="bg-yaya-500 hover:bg-yaya-600 text-white font-medium px-6 py-2.5 rounded-full disabled:opacity-50 transition-colors shrink-0"
           >
             {saving ? 'Guardando...' : 'Guardar receta'}
           </button>

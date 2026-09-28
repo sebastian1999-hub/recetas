@@ -76,7 +76,7 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
               {categoria}
             </p>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {items.map((item) => {
                 const isSelected = selected.has(normalize(item.nombre))
                 const color = isSelected ? SELECTED_COLOR : UNSELECTED_COLOR
