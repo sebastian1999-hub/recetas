@@ -36,7 +36,7 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
   function handleAddIngredient(nombre: string, icono: string) {
     setIngredientes((prev) => {
       const existing = prev.find((p) => p.nombre.toLowerCase() === nombre.toLowerCase())
-      if (existing) return prev
+      if (existing) return prev.filter((p) => p.id !== existing.id)
       return [
         ...prev,
         {
