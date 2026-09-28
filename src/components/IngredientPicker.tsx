@@ -25,7 +25,7 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
 
   const results = useMemo(() => {
     const q = normalize(query)
-    if (!q) return []
+    if (!q) return INGREDIENT_CATALOG
     return INGREDIENT_CATALOG.filter((item) => normalize(item.nombre).includes(q))
   }, [query])
 
@@ -53,7 +53,7 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
         className="w-full rounded-full border border-white/10 bg-dark-alt text-white placeholder-gray-500 px-4 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-yaya-400"
       />
 
-      <div className="max-h-80 overflow-y-auto pr-1 flex flex-col gap-5">
+      <div className="flex flex-col gap-5">
         {canAddCustom && (
           <button
             type="button"
@@ -110,12 +110,6 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
 
         {results.length === 0 && !canAddCustom && query.trim().length > 0 && (
           <p className="text-sm text-gray-400 text-center py-4">No se encontraron ingredientes</p>
-        )}
-
-        {query.trim().length === 0 && (
-          <p className="text-sm text-gray-500 text-center py-4">
-            Busca un ingrediente para añadirlo
-          </p>
         )}
       </div>
     </div>
