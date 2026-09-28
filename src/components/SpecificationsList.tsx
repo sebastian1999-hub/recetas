@@ -52,7 +52,7 @@ export default function SpecificationsList({ ingredientes, onChangeCantidad, onR
                   min={0}
                   value={ing.cantidadGramos}
                   onChange={(e) => onChangeCantidad(ing.id, Number(e.target.value))}
-                  className="w-16 sm:w-20 rounded-full border border-white/10 bg-dark-surface text-white px-2 py-1 text-sm text-right focus:outline-none focus:ring-2 focus:ring-yaya-400"
+                  className="w-16 sm:w-20 rounded-full border border-white/10 bg-dark-surface text-white px-2 py-1 text-base sm:text-sm text-right focus:outline-none focus:ring-2 focus:ring-yaya-400"
                 />
                 <span className="text-xs text-gray-500 w-4 sm:w-6">g</span>
                 <button

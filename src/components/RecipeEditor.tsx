@@ -146,7 +146,7 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
                 onChange={(e) => setDescripcion(e.target.value)}
                 placeholder="Descripción de la receta (opcional)"
                 rows={3}
-                className="w-full rounded-2xl border border-white/10 bg-dark-alt text-white placeholder-gray-500 px-4 py-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-yaya-400"
+                className="w-full rounded-2xl border border-white/10 bg-dark-alt text-white placeholder-gray-500 px-4 py-2.5 text-base sm:text-sm resize-none focus:outline-none focus:ring-2 focus:ring-yaya-400"
               />
             </div>
           </div>

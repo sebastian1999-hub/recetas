@@ -50,7 +50,7 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Buscar ingrediente..."
-        className="w-full rounded-full border border-white/10 bg-dark-alt text-white placeholder-gray-500 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yaya-400"
+        className="w-full rounded-full border border-white/10 bg-dark-alt text-white placeholder-gray-500 px-4 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-yaya-400"
       />
 
       <div className="max-h-80 overflow-y-auto pr-1 flex flex-col gap-5">
