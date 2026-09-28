@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Camera } from 'lucide-react'
+import { ArrowLeft, Camera } from 'lucide-react'
 import type { Recipe, RecipeIngredient } from '../types'
 import { tidyDescription } from '../lib/ai'
 import IngredientPicker from './IngredientPicker'
@@ -107,25 +107,23 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-end sm:items-center justify-center sm:p-4 z-50 overflow-y-auto">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-dark-surface rounded-t-card sm:rounded-card shadow-card w-full max-w-2xl sm:my-8 flex flex-col max-h-[95vh] sm:max-h-[90vh]"
-      >
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-white/10">
-          <h2 className="text-lg font-semibold text-white">
-            {recipe ? 'Editar receta' : 'Nueva receta'}
-          </h2>
+    <div className="min-h-screen bg-dark-bg flex flex-col">
+      <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
+        <div className="sticky top-0 z-10 bg-dark-surface border-b border-white/10 flex items-center gap-3 px-4 sm:px-6 py-4">
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:bg-white/10"
+            aria-label="Volver"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-gray-300 hover:bg-white/10 shrink-0"
           >
-            ✕
+            <ArrowLeft size={20} />
           </button>
+          <h2 className="text-lg font-semibold text-white">
+            {recipe ? 'Editar receta' : 'Nueva receta'}
+          </h2>
         </div>
 
-        <div className="overflow-y-auto px-4 sm:px-6 py-5 flex flex-col gap-5">
+        <div className="flex-1 px-4 sm:px-6 py-5 flex flex-col gap-5 max-w-2xl w-full mx-auto">
           <div className="flex gap-4 items-start">
             <label className="w-24 h-24 rounded-2xl bg-dark-alt border border-dashed border-yaya-400 flex items-center justify-center overflow-hidden cursor-pointer shrink-0 relative">
               {fotoUrl ? (
@@ -173,7 +171,7 @@ export default function RecipeEditor({ recipe, onClose, onSave, onDelete }: Prop
           {error && <p className="text-sm text-red-400">{error}</p>}
         </div>
 
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-white/10 gap-3">
+        <div className="sticky bottom-0 bg-dark-surface border-t border-white/10 flex items-center justify-between px-4 sm:px-6 py-4 gap-3">
           {recipe ? (
             <button
               type="button"

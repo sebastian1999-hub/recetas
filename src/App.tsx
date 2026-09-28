@@ -64,6 +64,17 @@ function App() {
     await load()
   }
 
+  if (showEditor) {
+    return (
+      <RecipeEditor
+        recipe={editing}
+        onClose={() => setShowEditor(false)}
+        onSave={handleSave}
+        onDelete={handleDelete}
+      />
+    )
+  }
+
   return (
     <div className="min-h-screen bg-dark-bg">
       <header className="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
@@ -123,15 +134,6 @@ function App() {
           </a>
         </p>
       </footer>
-
-      {showEditor && (
-        <RecipeEditor
-          recipe={editing}
-          onClose={() => setShowEditor(false)}
-          onSave={handleSave}
-          onDelete={handleDelete}
-        />
-      )}
     </div>
   )
 }
