@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { INGREDIENT_CATALOG, DEFAULT_ICON } from '../data/ingredientCatalog'
 import FoodIcon from './FoodIcon'
 
@@ -20,6 +21,16 @@ function normalize(text: string): string {
 
 export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
   const [query, setQuery] = useState('')
+  const [openCategories, setOpenCategories] = useState<Set<string>>(new Set())
+
+  function toggleCategory(categoria: string) {
+    setOpenCategories((prev) => {
+      const next = new Set(prev)
+      if (next.has(categoria)) next.delete(categoria)
+      else next.add(categoria)
+      return next
+    })
+  }
 
   const selected = useMemo(() => new Set(selectedNames.map(normalize)), [selectedNames])
 
@@ -71,42 +82,57 @@ export default function IngredientPicker({ onAdd, selectedNames = [] }: Props) {
           </button>
         )}
 
-        {Array.from(groups.entries()).map(([categoria, items]) => (
-          <div key={categoria}>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
-              {categoria}
-            </p>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-2.5">
-              {items.map((item) => {
-                const isSelected = selected.has(normalize(item.nombre))
-                const color = isSelected ? SELECTED_COLOR : UNSELECTED_COLOR
-                return (
-                  <button
-                    key={item.nombre}
-                    type="button"
-                    onClick={() => {
-                      onAdd(item.nombre, item.icono)
-                    }}
-                    className="relative aspect-square rounded-2xl p-2 flex flex-col justify-between text-left overflow-hidden hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-sm"
-                    style={{ backgroundColor: color }}
-                  >
-                    <span className="flex justify-end">
-                      <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px] leading-none">
-                        ⋯
-                      </span>
-                    </span>
-                    <span className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-[56%] aspect-square">
-                      <FoodIcon icono={item.icono} size="100%" color="#fff" className="opacity-90" />
-                    </span>
-                    <span className="text-xs font-semibold text-white leading-tight break-words">
-                      {item.nombre}
-                    </span>
-                  </button>
-                )
-              })}
+        {Array.from(groups.entries()).map(([categoria, items]) => {
+          const isOpen = query.trim().length > 0 || openCategories.has(categoria)
+          return (
+            <div key={categoria}>
+              <button
+                type="button"
+                onClick={() => toggleCategory(categoria)}
+                className="w-full flex items-center justify-between gap-2 mb-2 text-left"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                  {categoria} <span className="text-gray-600">({items.length})</span>
+                </p>
+                <ChevronDown
+                  size={16}
+                  className={`text-gray-500 shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {isOpen && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-2.5">
+                  {items.map((item) => {
+                    const isSelected = selected.has(normalize(item.nombre))
+                    const color = isSelected ? SELECTED_COLOR : UNSELECTED_COLOR
+                    return (
+                      <button
+                        key={item.nombre}
+                        type="button"
+                        onClick={() => {
+                          onAdd(item.nombre, item.icono)
+                        }}
+                        className="relative aspect-square rounded-2xl p-2 flex flex-col justify-between text-left overflow-hidden hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-sm"
+                        style={{ backgroundColor: color }}
+                      >
+                        <span className="flex justify-end">
+                          <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px] leading-none">
+                            ⋯
+                          </span>
+                        </span>
+                        <span className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-[56%] aspect-square">
+                          <FoodIcon icono={item.icono} size="100%" color="#fff" className="opacity-90" />
+                        </span>
+                        <span className="text-xs font-semibold text-white leading-tight break-words">
+                          {item.nombre}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          )
+        })}
 
         {results.length === 0 && !canAddCustom && query.trim().length > 0 && (
           <p className="text-sm text-gray-400 text-center py-4">No se encontraron ingredientes</p>
